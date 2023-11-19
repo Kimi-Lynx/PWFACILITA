@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário sobre o Sistema Respiratório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px 20px;
+            background-color: #C5FAFF;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            background-color: #04232F;
+            color: #fff;
+            padding: 50px;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        #feedback p {
+            text-align: justify;
+        }
+        
+        p {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border: 2px solid #54B4B9;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            margin-right: 10px;
+            margin-left: 10px; 
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            margin-right: 10px;
+            margin-left: 10px; 
+        }
+
+        input[type="button"] {
+            background-color: #54B4B9; 
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .resposta-correta {
+            background-color: #8bc34a;
+            border: 2px solid #4caf50;
+        }
+
+        .resposta-incorreta {
+            background-color: #f44336;
+            border: 2px solid #d32f2f;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .botoes input {
+            margin-right: 10px;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <h1>
+        BIOLOGIA: SISTEMA RESPIRATÓRIO
+    </h1>
+
+<form action="#" method="post" id="questionario">
+    <p>2) (PUC-RJ) Examine as afirmativas abaixo, relativas à respiração humana:</p>
+    <p>I. Ela é responsável pela absorção de oxigênio (O2) e liberação de gás carbônico (CO2).</p> 
+    <p>II. O feto humano respira através de brânquias enquanto está na bolsa amniótica e, a partir do oitavo mês, as brânquias se transformam em pulmões.</p> 
+    <p>III. O sangue se utiliza dos glóbulos brancos para transportar o oxigênio, pois estes aumentam bastante a capacidade do sangue de transportar gases.</p> 
+    <p>IV. O ar penetra pelo nariz e passa pela faringe, laringe, traqueia, brônquios, bronquíolos e alvéolos, onde se dá a troca dos gases.</p>
+    <p>Estão corretas somente as afirmativas:</p> <br>
+
+    <label for="a"> 
+        <input type="radio" name="resposta" value="a" id="a"> 
+        a) I e II
+    </label> <br>
+    <label for="b"> 
+        <input type="radio" name="resposta" value="b" id="b"> 
+        b) II e III
+    </label> <br>
+    <label for="c"> 
+        <input type="radio" name="resposta" value="c" id="c"> 
+        c) I e IV
+    </label> <br>
+    <label for="d"> 
+        <input type="radio" name="resposta" value="d" id="d"> 
+        d) I, III e IV
+    </label> <br>
+    <label for="e"> 
+        <input type="radio" name="resposta" value="e" id="e"> 
+        e) II, III e IV
+    </label> <br>
+
+    <br><br>
+
+<div class="botoes">
+    <input type="button" value="Validar Resposta" onclick="validarResposta()">
+    <input type="button" value="Próxima Questão" onclick="proximaQuestao()" style="display:none;">
+    <input type="button" value="Retornar ao Menu" onclick="retornarAoMenu()">
+</div>
+
+</form>
+
+
+<div id="feedback" style="display:none;"></div>
+
+<script>
+function validarResposta() {
+    var respostas = document.getElementsByName("resposta");
+    var respostaCorreta = "c";
+    var respostaSelecionada = false;
+
+    for (var i = 0; i < respostas.length; i++) {
+        if (respostas[i].checked) {
+            respostaSelecionada = true;
+            var label = respostas[i].parentNode;
+            label.classList.remove("resposta-correta");
+            label.classList.remove("resposta-incorreta");
+
+            if (respostas[i].value === respostaCorreta) {
+                label.classList.add("resposta-correta");
+            } else {
+                label.classList.add("resposta-incorreta");
+            }
+        }
+    }
+
+    if (respostaSelecionada) {
+        var feedback = document.getElementById("feedback");
+        feedback.style.display = "block";
+
+        if (respostas[2].checked && respostas[2].value === respostaCorreta) {
+            feedback.innerHTML = "<p>Resposta correta: letra c - I e IV.</p>" +
+                                 "<p><strong>Explicação:</strong></p>" +
+
+                                 "<p>O ar que respiramos contém oxigênio, indispensável para a realização das " +
+                                 "atividades celulares. Dentro do nosso corpo ocorrem as trocas gasosas e o " +
+                                 "excesso de gás carbônico é liberado para regular o pH do nosso organismo.</p>" +
+                                 "<p>Quando o ar entra pelo nariz, ele passa pela faringe, sendo direcionado à laringe, " +
+                                 "evitando que vá para o sistema digestório. Na traqueia o ar é aquecido, filtrado e " +
+                                 "umidificado e as ramificações tubulares, também chamadas de bronquíolos,</p>" +
+                                 "<p>direcionam o ar para os alvéolos pulmonares, que formam os pulmões, onde " +
+                                 "ocorrem as trocas gasosas. ";
+        } else {
+            feedback.innerHTML ="<p>Resposta incorreta: letra c - I e IV.</p>" +
+                                 "<p><strong>Explicação:</strong></p>" +
+
+                                 "<p>O ar que respiramos contém oxigênio, indispensável para a realização das " +
+                                 "atividades celulares. Dentro do nosso corpo ocorrem as trocas gasosas e o " +
+                                 "excesso de gás carbônico é liberado para regular o pH do nosso organismo.</p>" +
+                                 "<p>Quando o ar entra pelo nariz, ele passa pela faringe, sendo direcionado à laringe, " +
+                                 "evitando que vá para o sistema digestório. Na traqueia o ar é aquecido, filtrado e " +
+                                 "umidificado e as ramificações tubulares, também chamadas de bronquíolos,</p>" +
+                                 "<p>direcionam o ar para os alvéolos pulmonares, que formam os pulmões, onde " +
+                                 "ocorrem as trocas gasosas. ";
+        }
+
+        document.getElementById("questionario").querySelectorAll("input[type=radio]").forEach(function(el) {
+            el.disabled = true;
+        });
+
+        document.querySelector('input[value="Próxima Questão"]').style.display = "block";
+    } else {
+        alert("Por favor, selecione uma alternativa antes de validar a resposta.");
+    }
+}
+
+    function proximaQuestao() {
+        var respostas = document.getElementsByName("resposta");
+
+        for (var i = 0; i < respostas.length; i++) {
+            var label = respostas[i].parentNode;
+            label.classList.remove("resposta-correta");
+            label.classList.remove("resposta-incorreta");
+        }
+
+        for (var i = 0; i < respostas.length; i++) {
+            respostas[i].checked = false;
+        }
+
+        var feedback = document.getElementById("feedback");
+        feedback.style.display = "none";
+
+        document.getElementById("questionario").querySelectorAll("input[type=radio]").forEach(function(el) {
+            el.disabled = false;
+        });
+        
+
+        document.querySelector('input[value="Próxima Questão"]').style.display = "none";
+    }
+    function retornarAoMenu() {
+        window.location.href = 'menu.php';
+    }
+
+</script>
+
+
+</body>
+</html>

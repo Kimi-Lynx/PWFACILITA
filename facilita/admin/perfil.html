@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #01103a 0%,  #000000  100%);
+        }
+
+        header {
+            background: linear-gradient(90deg, #01103a 0%,  #000000  100%);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #95e6ff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Perfil do Usuário</h1>
+    </header>
+
+    <div class="container">
+       <div class="h2">    <h2>Informações do Perfil</h2></div> 
+        <form id="profile-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" value="Nome do Usuário" disabled>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" value="usuario@email.com" disabled>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" value="********" disabled>
+
+            <div class="btn-container">
+                <button id="edit-btn" type="button">Editar Informações</button>
+                <button id="save-btn" type="button" style="display: none;">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    
+        const editButton = document.getElementById("edit-btn");
+        const saveButton = document.getElementById("save-btn");
+        const formElements = document.querySelectorAll("#profile-form input");
+
+        editButton.addEventListener("click", () => {
+            formElements.forEach(input => {
+                input.removeAttribute("disabled");
+            });
+            editButton.style.display = "none";
+            saveButton.style.display = "inline-block";
+        });
+
+        saveButton.addEventListener("click", () => {
+            formElements.forEach(input => {
+                input.setAttribute("disabled", "disabled");
+            });
+            editButton.style.display = "inline-block";
+            saveButton.style.display = "none";
+        });
+    </script>
+</body>
+</html>

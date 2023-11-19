@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assuntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #C5FAFF;
+        }
+
+        header {
+            background-color: #04232F;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .subject-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+        }
+
+        .subject-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .subject-description {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+     
+        <h1>Matérias</h1>
+      
+     
+    </header>
+    <div class="container">
+    
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Língua Portuguesa</a></h2>
+            <p class="subject-description">
+                Gramática, Literatura, Redação, etc.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Língua Estrangeira</a></h2>
+            <p class="subject-description">
+                Inglês, Espanhol, Francês, etc.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">História</a></h2>
+            <p class="subject-description">
+                História Geral, História do Brasil, etc.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Filosofia</a></h2>
+            <p class="subject-description">
+                Filosofia.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Sociologia</a></h2>
+            <p class="subject-description">
+                Sociologia.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Geografia</a></h2>
+            <p class="subject-description">
+                Geografia Geral, Geografia do Brasil, etc.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Biologia</a></h2>
+            <p class="subject-description">
+                Biologia.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Matemática</a></h2>
+            <p class="subject-description">
+                Matemática.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Física</a></h2>
+            <p class="subject-description">
+                Física.
+            </p>
+        </div>
+        <div class="subject-card">
+            <h2 class="subject-title"><a href="./assuntos.html">Química</a></h2>
+            <p class="subject-description">
+                Química.
+            </p>
+        </div>
+    </div>
+    <script>
+        
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("search");
+        const subjectCards = document.querySelectorAll(".subject-card");
+
+        searchInput.addEventListener("input", function () {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+
+            subjectCards.forEach(function (card) {
+                const subjectTitle = card.querySelector(".subject-title").textContent.toLowerCase();
+                const subjectDescription = card.querySelector(".subject-description").textContent.toLowerCase();
+                const isVisible = subjectTitle.includes(searchTerm) || subjectDescription.includes(searchTerm);
+
+                if (isVisible) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+
+    </script>
+</body>
+</html>
+

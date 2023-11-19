@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário sobre o Sistema Respiratório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px 20px;
+            background-color: #C5FAFF;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            background-color: #04232F;
+            color: #fff;
+            padding: 50px;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        #feedback p {
+            text-align: justify;
+        }
+        
+        p {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border: 2px solid #54B4B9;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            margin-right: 10px;
+            margin-left: 10px; 
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            margin-right: 10px;
+            margin-left: 10px; 
+        }
+
+        input[type="button"] {
+            background-color: #54B4B9;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .resposta-correta {
+            background-color: #8bc34a;
+            border: 2px solid #4caf50;
+        }
+
+        .resposta-incorreta {
+            background-color: #f44336;
+            border: 2px solid #d32f2f;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+.botoes input {
+    margin-right: 10px;
+}
+
+    </style>
+</head>
+<body>
+<h1> 
+    BIOLOGIA: SISTEMA RESPIRATÓRIO
+</h1>
+
+<form action="#" method="post" id="questionario">
+
+    <p>1) O sistema respiratório é composto por órgãos que atuam no equilíbrio do organismo. Entre as suas funções estão: trocas gasosas, defesa pulmonar e produção de sons. Assinale a alternativa correta que identifica os órgãos do sistema respiratório enumerados a seguir:</p><br>
+
+    <label for="a"> 
+        <input type="radio" name="resposta" value="a" id="a"> 
+        a) 1-nariz, 2-boca, 3-faringe, 4-pulmões e 5-traqueia 
+    </label> <br>
+    <label for="b"> 
+        <input type="radio" name="resposta" value="b" id="b"> 
+        b) 1-nariz, 2-boca, 3-laringe, 4-pulmões e 5-diafragma 
+    </label> <br>
+    <label for="c"> 
+        <input type="radio" name="resposta" value="c" id="c"> 
+        c) 1-nariz, 2-boca, 3-traqueia, 4-pulmões e 5-diafragma 
+    </label> <br>
+    <label for="d"> 
+        <input type="radio" name="resposta" value="d" id="d"> 
+        d) 1-nariz, 2-boca, 3-alvéolos, 4-pulmões e 5-traqueia 
+    </label> <br>
+    <label for="e"> 
+        <input type="radio" name="resposta" value="e" id="e"> 
+        e) 1-nariz, 2-boca, 3-brônquios, 4-pulmões e 5-diafragma 
+    </label> <br>
+
+    <br><br>
+
+<div class="botoes">
+    <input type="button" value="Validar Resposta" onclick="validarResposta()">
+    <input type="button" value="Próxima Questão" onclick="proximaQuestao()" style="display:none;">
+    <input type="button" value="Retornar ao Menu" onclick="retornarAoMenu()">
+</div>
+
+
+
+</form>
+
+<div id="feedback" style="display:none;"></div>
+
+<script>
+    function validarResposta(questao) {
+        var respostas = document.getElementsByName("resposta");
+        var respostaCorreta = "c";
+        var respostaSelecionada = false;
+    
+        for (var i = 0; i < respostas.length; i++) {
+            if (respostas[i].checked) {
+                respostaSelecionada = true;
+                var label = respostas[i].parentNode;
+                label.classList.remove("resposta-correta");
+                label.classList.remove("resposta-incorreta");
+    
+                if (respostas[i].value === respostaCorreta) {
+                    label.classList.add("resposta-correta");
+                } else {
+                    label.classList.add("resposta-incorreta");
+                }
+            }
+        }
+    
+        if (respostaSelecionada) {
+            var feedback = document.getElementById("feedback");
+            feedback.style.display = "block";
+    
+            if (respostas[2].checked && respostas[2].value === respostaCorreta) {
+                feedback.innerHTML = "<p>Resposta correta: letra c - 1-nariz, 2-boca, 3-traqueia, 4-pulmões e 5-diafragma.</p>" +
+                                    "<p><strong>Explicação:</strong></p>" +
+                                    "<p><strong>1) Nariz e boca:</strong> São as vias de entrada do ar no sistema respiratório. " +
+                                    "O ar entra pelo nariz, onde é umedecido, filtrado e aquecido, ou pela boca em situações " +
+                                    "de maior necessidade de oxigenação.</p>" +
+                                    "<p><strong>2) Traqueia:</strong> É um tubo que se estende da parte inferior da laringe até " +
+                                    "os brônquios, permitindo a passagem do ar para os pulmões. A traqueia é responsável por " +
+                                    "conduzir o ar inspirado até os pulmões.</p>" +
+                                    "<p><strong>3) Pulmões:</strong> São os principais órgãos do sistema respiratório, onde ocorrem " +
+                                    "as trocas gasosas entre o oxigênio do ar inspirado e o dióxido de carbono produzido pelo " +
+                                    "organismo. Os pulmões também têm a função de defesa pulmonar, filtrando partículas e " +
+                                    "agentes patogênicos presentes no ar.</p>" +
+                                    "<p><strong>4) Diafragma:</strong> É um músculo localizado abaixo dos pulmões que desempenha " +
+                                    "um papel crucial na respiração. Ao se contrair, o diafragma se achata e aumenta o volume " +
+                                    "da cavidade torácica, permitindo a entrada de ar nos pulmões (inspiração). Ao relaxar, " +
+                                    "o diafragma retorna à sua forma original, diminuindo o volume da cavidade torácica e " +
+                                    "expulsando o ar dos pulmões (expiração).</p>";
+            } else {
+                feedback.innerHTML = "<p>Resposta incorreta. A alternativa correta é a letra c.</p>" +
+                                    "<p><strong>Explicação:</strong></p>" +
+                                    "<p><strong>1) Nariz e boca:</strong> São as vias de entrada do ar no sistema respiratório. " +
+                                    "O ar entra pelo nariz, onde é umedecido, filtrado e aquecido, ou pela boca em situações " +
+                                    "de maior necessidade de oxigenação.</p>" +
+                                    "<p><strong>2) Traqueia:</strong> É um tubo que se estende da parte inferior da laringe até " +
+                                    "os brônquios, permitindo a passagem do ar para os pulmões. A traqueia é responsável por " +
+                                    "conduzir o ar inspirado até os pulmões.</p>" +
+                                    "<p><strong>3) Pulmões:</strong> São os principais órgãos do sistema respiratório, onde ocorrem " +
+                                    "as trocas gasosas entre o oxigênio do ar inspirado e o dióxido de carbono produzido pelo " +
+                                    "organismo. Os pulmões também têm a função de defesa pulmonar, filtrando partículas e " +
+                                    "agentes patogênicos presentes no ar.</p>" +
+                                    "<p><strong>4) Diafragma:</strong> É um músculo localizado abaixo dos pulmões que desempenha " +
+                                    "um papel crucial na respiração. Ao se contrair, o diafragma se achata e aumenta o volume " +
+                                    "da cavidade torácica, permitindo a entrada de ar nos pulmões (inspiração). Ao relaxar, " +
+                                    "o diafragma retorna à sua forma original, diminuindo o volume da cavidade torácica e " +
+                                    "expulsando o ar dos pulmões (expiração).</p>";
+            }
+
+            document.getElementById("questionario").querySelectorAll("input[type=radio]").forEach(function(el) {
+                el.disabled = true;
+            });
+
+            document.querySelector('input[value="Próxima Questão"]').style.display = "block";
+        } else {
+            alert("Por favor, selecione uma alternativa antes de validar a resposta.");
+        }
+    }
+
+    function proximaQuestao() {
+        var respostas = document.getElementsByName("resposta");
+
+        for (var i = 0; i < respostas.length; i++) {
+            var label = respostas[i].parentNode;
+            label.classList.remove("resposta-correta");
+            label.classList.remove("resposta-incorreta");
+        }
+
+        for (var i = 0; i < respostas.length; i++) {
+            respostas[i].checked = false;
+        }
+
+        var feedback = document.getElementById("feedback");
+        feedback.style.display = "none";
+
+        document.getElementById("questionario").querySelectorAll("input[type=radio]").forEach(function(el) {
+            el.disabled = false;
+        });
+
+        document.querySelector('input[value="Próxima Questão"]').style.display = "none";
+        window.location.href = 'formQuestao2BIO.html';
+    }
+</script>
+
+<script>
+    function retornarAoMenu() {
+        window.location.href = 'menu.php';
+    }
+</script>
+
+</body>
+</html>

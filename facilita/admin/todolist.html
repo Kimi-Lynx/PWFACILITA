@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/fonts/fonts.css">
+    <title>To Do List Facilita</title>
+    <style>
+        :root{
+    --color-dark: rgb(14, 14, 14);
+    --color-dark2: rgb(32, 32, 32);
+    --color-dark3: rgb(22, 22, 22);
+    --color-white: #fff;
+    --color-green: rgb(103, 195, 80);
+    --color-green2: rgb(51, 149, 26);
+    --color-red: rgb(184, 40, 35);
+    --color-red2: rgb(146, 22, 17);
+}
+
+body{
+    font-family: 'Lato';
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.content--add-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#input-new-task,
+#btn-new-task{
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    padding: 1rem;
+}
+
+#input-new-task{
+    width: 20rem;
+    border-radius: 1rem;
+}
+
+#btn-new-task{
+    background-color: var(--color-dark2);
+    color: var(--color-white);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+#btn-new-task:hover{
+    background-color: var(--color-dark3);
+}
+
+#to-do-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+}
+
+#to-do-list li{
+    list-style-type: none;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#to-do-list li:hover{
+    background-color: var(--color-dark3);
+    transition: .4s;
+    border-radius: 1rem;
+    padding-left: 1rem;
+}
+
+#btn-ok{
+    border: none;
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding: .4rem .8rem;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .4s;
+}
+
+#btn-ok:hover{
+    background-color: var(--color-green2);
+}
+    </style>
+</head>
+<body>
+    <h1>To Do List </h1>
+    <div class="content">
+        <div class="content--add-item">
+            <input type="text" id="input-new-task" placeholder="Digite sua nova task">
+            <button onclick="newTask()" id="btn-new-task" title="Clique aqui para adicionar uma nova task">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="content--body">
+            <ol id="to-do-list">
+            </ol>
+        </div>
+    </div>
+</body>
+<script>
+    const localStorageKey = 'to-do-list-gn'
+
+function validateIfExistsNewTask()
+{
+    let values     = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+    let inputValue = document.getElementById('input-new-task').value
+    let exists     = values.find(x => x.name == inputValue)
+    return !exists ? false : true
+}
+
+function newTask()
+{
+    let input = document.getElementById('input-new-task')
+    input.style.border = ''
+
+    // validation
+    if(!input.value)
+    {
+        input.style.border = '1px solid red'
+        alert('Digite algo para inserir em sua lista')
+    }
+    else if(validateIfExistsNewTask())
+    {
+        alert('Já existe uma task com essa descrição')
+    }
+    else
+    {
+        // increment to localStorage
+        let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+        values.push({
+            name: input.value
+        })
+        localStorage.setItem(localStorageKey,JSON.stringify(values))
+        showValues()
+    }
+    input.value = ''
+}
+
+function showValues()
+{
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+    let list = document.getElementById('to-do-list')
+    list.innerHTML = ''
+    for(let i = 0; i < values.length; i++)
+    {
+        list.innerHTML += `<li>${values[i]['name']}<button id='btn-ok' onclick='removeItem("${values[i]['name']}")'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg></button></li>`
+    }
+}
+
+function removeItem(data)
+{
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+    let index = values.findIndex(x => x.name == data)
+    values.splice(index,1)
+    localStorage.setItem(localStorageKey,JSON.stringify(values))
+    showValues()
+}
+
+showValues()
+</script>
+</html>
